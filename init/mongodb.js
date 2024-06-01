@@ -1,9 +1,9 @@
 const mongoose = require("mongoose")
-const {conectionUrl} = require("./config/kyes")
+const {connectionUrl} = require("../config/kyes")
 
 const connectMongodb = async() => {
     try{
-        await mongoose.connect(conectionUrl)
+        await mongoose.connect(connectionUrl);
         console.log("Database connection successfull")
     }catch(error){
         console.log(error.message)
