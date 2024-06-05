@@ -16,4 +16,16 @@ const signupValidator = [
         .withMessage("Password should be 6 characters long")
 ]
 
-module.exports = { signupValidator }
+const signinValidator = [
+    check("email")
+        .notEmpty()
+        .withMessage("Email is required")
+        .isEmail()
+        .withMessage("Invalid email"),
+
+    check("password")
+        .notEmpty()
+        .withMessage("Password is required")
+];
+
+module.exports = { signupValidator, signinValidator }
