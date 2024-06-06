@@ -1,7 +1,9 @@
 const { check } = require("express-validator")
 
 const signupValidator = [
-    check("name").notEmpty().withMessage("Name is required"),
+    check("name")
+        .notEmpty()
+        .withMessage("Name is required"),
 
     check("email")
         .isEmail()
@@ -28,4 +30,24 @@ const signinValidator = [
         .withMessage("Password is required")
 ];
 
-module.exports = { signupValidator, signinValidator }
+const emailValidator = [
+    check("email")
+        .isEmail()
+        .withMessage("Invalid Email")
+        .notEmpty()
+        .withMessage("Email is required")
+];
+
+const verifyUserValidator = [
+    check("email")
+        .isEmail()
+        .withMessage("Invalid Email")
+        .notEmpty()
+        .withMessage("Email is required"),
+
+    check("code")
+        .notEmpty()
+        .withMessage("code is required")
+]
+
+module.exports = { signupValidator, signinValidator, emailValidator, verifyUserValidator }
