@@ -145,6 +145,67 @@ const forgotPasswordCode = async (req, res, next) => {
     }catch(error){
         next(error)
     }
+};
+
+const recoverPassword = async (req, res, next) => {
+    try{
+        const {email, password, code} = req.body
+        const user = await User.findOne({email})
+
+        if(!user){
+            res.code = 404;
+            throw new Error("User not found")
+        }
+
+        if(user.forgotPasswordCode !== code){
+            res.code = 400;
+            throw new Error("Invalid code")
+        }
+
+        const hashedPassword = await hashPassword(password)
+        user.password = hashedPassword
+        user.forgotPasswordCode = null
+        await user.save()
+
+        res.status(200).json({code : 200, status : true, message : "Password recovered successfully"})
+
+    }catch(error){
+        next(error)
+    }
+};
+
+const changePassword = async (req, res, next) => {
+    try{
+        const {oldPassword, newPassword} = req.body;
+        const _id = req.user
+
+        const user = await User.findById(_id);
+        if(!user){
+            res.code = 404;
+            throw new Error("User not found")
+        }
+
+        const match = await comparePassword(oldPassword, user.password)
+        if(!match){
+            res.code = 400;
+            throw new Error("Old password doesn't match")
+        }
+
+        if(oldPassword === newPassword){
+            res.code = 400;
+            throw new Error("You are providing old password")
+        }
+
+        const hashedPassword = await hashPassword(newPassword)
+        user.password = hashedPassword
+        await user.save()
+
+        res.status(200).json({code : 200, status : true, message : "Password changed successfully"})
+
+        res.json(req.user)
+    }catch(error){
+        next(error)
+    }
 }
 
-module.exports = {signup, signin, verifyCode, verifyUSer, forgotPasswordCode}
+module.exports = {signup, signin, verifyCode, verifyUSer, forgotPasswordCode, recoverPassword, changePassword}
