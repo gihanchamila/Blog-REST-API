@@ -206,6 +206,14 @@ const changePassword = async (req, res, next) => {
     }catch(error){
         next(error)
     }
+};
+
+const updateProfile = async (req, res, next) => {
+    try{
+
+    }catch(error){
+        next(error)
+    }
 }
 
-module.exports = {signup, signin, verifyCode, verifyUSer, forgotPasswordCode, recoverPassword, changePassword}
+module.exports = {signup, signin, verifyCode, verifyUSer, forgotPasswordCode, recoverPassword, changePassword, updateProfile}
