@@ -1,2 +1,4 @@
 const User = require("./User")
-module.exports = { User }
+const Category = require("./Category")
+
+module.exports = { User, Category }
