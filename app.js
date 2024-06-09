@@ -18,7 +18,7 @@ connectMongodb()
 // third-party middleware
 app.use(express.json({limit : "500mb"}));
 app.use(bodyParser.urlencoded({limit : "500mb", extended : true}));
-app.use(morgan("dev"))
+app.use(morgan("dev")) // to console log req
 
 // route section
 app.use("/api/v1/auth", authRoute)
