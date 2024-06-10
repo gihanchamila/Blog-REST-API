@@ -9,5 +9,7 @@ const isAdmin = require("../middlewares/isAdmin")
 router.post("/", isAuth, isAdmin, addCategoryValidator,  validate, categoryController.addCategory) // use isAdmin after isAuth
 router.put("/:id", isAuth, isAdmin, idValidator, validate, categoryController.updateCategory )
 router.delete("/:id", isAuth, isAdmin, idValidator, validate, categoryController.deleteCategory)
+router.get("/", isAuth, categoryController.getCategories)
+router.get("/:id", isAuth, idValidator, validate, categoryController.getCategory)
 
 module.exports = router;

@@ -5,7 +5,7 @@ const morgan = require("morgan")
 
 dotenv.config();
 const connectMongodb = require("./init/mongodb")
-const { authRoute, categoryRoute } = require("./routes")
+const { authRoute, categoryRoute, fileRoute } = require("./routes")
 const {errorHandler} = require("./middlewares")
 const notFound = require("./controllers/notfound")
 
@@ -23,6 +23,7 @@ app.use(morgan("dev")) // to console log req
 // route section
 app.use("/api/v1/auth", authRoute)
 app.use("/api/v1/category", categoryRoute)
+app.use("/api/v1/file", fileRoute)
 
 // not found controller
 app.use("*", notFound)
