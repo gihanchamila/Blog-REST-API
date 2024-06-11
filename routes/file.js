@@ -2,8 +2,8 @@ const express = require("express")
 const router = express.Router()
 const isAuth = require("../middlewares/isAuth")
 const {fileController} = require("../controllers")
-const multer = require("multer")
+const upload = require("../middlewares/upload")
 
-router.post("/upload", isAuth, fileController.uploadFile )
+router.post("/upload", isAuth, /*upload.single("image")*/ upload.array("image", 3), fileController.uploadFile )
 
 module.exports = router
