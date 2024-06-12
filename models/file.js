@@ -6,7 +6,7 @@ const fileSchema = mongoose.Schema({
     mimeType : String,
     createdBy : {type : mongoose.Types.ObjectId, ref : "user"}
 }, {
-    timeStamps : true
+    timestamps : true
 });
 
 const File = mongoose.model("file", fileSchema)
