@@ -13,5 +13,6 @@ router.post("/forgot-password-code", emailValidator, validate, authController.fo
 router.post("/recover-password", recoverPasswordValidator, validate, authController.recoverPassword)
 router.put("/change-password", changePasswordValidator, validate, isAuth, authController.changePassword)
 router.put("/update-profile", updateProfileValidator, validate, isAuth, authController.updateProfile)
+router.get("/current-user", isAuth, authController.currentUSer)
 
 module.exports = router;
