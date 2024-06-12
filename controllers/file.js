@@ -1,5 +1,5 @@
 const path = require("path");
-const { validateExtention } = require("../validators/file");
+const { validateExtention } = require("../validators/File");
 const { uploadFileToS3, signedUrl, deleteFileFromS3 } = require("../utils/awsS3")
 const {File} = require("../models")
 
