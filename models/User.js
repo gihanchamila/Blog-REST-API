@@ -8,7 +8,8 @@ const userSchema = mongoose.Schema({
     role: {type : Number, default : 3},
     verificationCode : String,
     forgotPasswordCode : String,
-    isVerified : {type : Boolean, default : false}
+    isVerified : {type : Boolean, default : false},
+    profilePic : {type : mongoose.Types.ObjectId, ref : "file"}
 }, {
     timestamps : true
 });
