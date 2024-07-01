@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const morgan = require("morgan")
+const cors = require("cors")
 
 dotenv.config();
 const connectMongodb = require("./init/mongodb")
@@ -16,6 +17,7 @@ const app = express();
 connectMongodb()
 
 // third-party middleware
+app.use(cors({origin: "http://localhost:5173"}))
 app.use(express.json({limit : "500mb"}));
 app.use(bodyParser.urlencoded({limit : "500mb", extended : true}));
 app.use(morgan("dev")) // to console log req
@@ -24,7 +26,7 @@ app.use(morgan("dev")) // to console log req
 app.use("/api/v1/auth", authRoute)
 app.use("/api/v1/category", categoryRoute)
 app.use("/api/v1/file", fileRoute)
-app.use("/api/v1/post", postRoute)
+app.use("/api/v1/posts", postRoute)
 
 // not found controller
 app.use("*", notFound)

@@ -25,7 +25,6 @@ const isAuth = async (req, res, next) => {
             res.code = 400;
             throw new Error("Token is required")
         }
-
         next()
     }catch(error){
         next(error)
