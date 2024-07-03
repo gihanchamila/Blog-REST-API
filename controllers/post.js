@@ -140,7 +140,10 @@ const getPost = async (req, res, next) => {
     try{
         const {id} = req.params
 
-        const post = await Post.findById(id).populate("file").populate("category").populate("updatedBy, -password -verificationCode -forgotPasswordCode")
+        const post = await Post.findById(id).populate("file").populate("category").populate({
+            path: "updatedBy",
+            select: "-password -verificationCode -forgotPasswordCode"
+        }) 
         if(!post){
             res.code = 404;
             throw new Error("Post not found")
